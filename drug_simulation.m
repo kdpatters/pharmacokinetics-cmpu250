@@ -45,9 +45,7 @@ title('[Summation] Drug concentration versus time')
 xlabel('Time (hours)')
 ylabel('Concentration (ug/mL)')
     
-% Point calculation
-% calculate concentration for given number of hours
-% total number of pills taken in time in time interval
+% Point calculation (concentration after given number of hours)
 N = floor(hours / interval) + 1; % number of pills taken
 sum_of_decays = exp(-k*t) * (exp(k*I*N) - 1) / (exp(k*I) - 1);
 concentration = sum_of_decays * init_conce;
