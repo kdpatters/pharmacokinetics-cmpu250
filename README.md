@@ -5,4 +5,4 @@ The included MATLAB file contains a script that compares two different methods o
 
 This script was initially created to aid in discussion in Vassar College's CMPU250 class.  The code was written in MATLAB_R2017B and requires the Symbolic Math add-on.
 
-See my write-up [here](pharmacokinetics-cmpu250/CMPU250_Drug_Absorbtion.pdf).
+See my write-up [here](CMPU250_Drug_Absorbtion.pdf).
