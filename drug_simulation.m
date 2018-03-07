@@ -18,7 +18,7 @@ num_points = 25; % how many points to graph, not including t = 0
 
 % Intermediate calculations
 sub_divisions = floor((num_points) / (hours/interval));
-% Divisions is approximately equal to `num_points`.
+% Divisions is equal to `num_points` + 1
 divisions = (hours / interval) * sub_divisions;
 delta_time = hours / divisions;
 
