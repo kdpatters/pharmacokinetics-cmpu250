@@ -41,7 +41,7 @@ end
 % Plot graph
 drug_conce = figure();
 plot(times, conces, 'b', 'DisplayName', 'Summation');
-title('[Summation] Drug concentration versus time')
+title('Drug concentration versus time')
 xlabel('Time (hours)')
 ylabel('Concentration (ug/mL)')
     
