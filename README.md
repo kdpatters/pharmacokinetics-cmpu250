@@ -1,2 +1,4 @@
 # pharmacokinetics-cmpu250
-![Graph comparing methods](methods.eps)
+The code in this repository should be used for educational purposes only as the coefficients are arbitrary and the simulations make many simplifying assumptions.
+
+The included MATLAB file contains a script that compares two different methods of computing the concentration of drug in a person's blood after a given amount of time in hours.  Namely, the methods are using a more discretized approach or tabular method versus an entirely analytical solution.
