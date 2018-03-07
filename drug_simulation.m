@@ -15,10 +15,13 @@ rate_constant = log(2) / halflife_drug; % Exponential decay: 1/2 = e^{-kt}
 hours = 75;
 % interval MUST be an integer of function will break
 interval = 24; % number of hours between when each pill is taken
-num_points = 50; % how many points to graph, including t = 0
+num_points = 25; % how many points to graph, including t = 0
 
 % Intermediate calculations
-delta_time = hours/(num_points - 1); % size of each time step
+sub_divisions = floor((num_points) / (hours/interval));
+% Divisions is approximately equal to `num_points`.
+divisions = (hours / interval) * sub_divisions;
+delta_time = hours / divisions;
 
 % initial concentration of drug added by each pill
 init_conce = dosage_in_ug * absorbtion_frac / adult_plasma_in_ml;
@@ -26,13 +29,13 @@ init_conce = dosage_in_ug * absorbtion_frac / adult_plasma_in_ml;
 % --- Summation method ---
 % Graph generation
 times = 0:delta_time:hours; % fill 1D array with numbers of hours passed
-conces = zeros([1, num_points]); % initialize empty array of dim(times)
-syms x
-for i = 1:num_points
+conces = zeros([1, length(times)]); % initialize empty array of dim(times)
+k = rate_constant;
+I = interval;
+for i = 1:length(times)
     t = times(i);
-    num_pills = floor(t / interval) + 1;
-    sum_of_decays = symsum(exp(-rate_constant * (t - x * interval)) ...
-    , x, 0, num_pills - 1);
+    N = floor(t / interval) + 1; % number of pills
+    sum_of_decays = exp(-k*t) * (exp(k*I*N) - 1) / (exp(k*I) - 1);
     conces(i) = sum_of_decays * init_conce;
 end
 
@@ -46,9 +49,8 @@ ylabel('Concentration (ug/mL)')
 % Point calculation
 % calculate concentration for given number of hours
 % total number of pills taken in time in time interval
-num_pills = floor(hours / interval) + 1;
-sum_of_decays = symsum(exp(-rate_constant * (hours - x * interval)) ...
-    , x, 0, num_pills - 1);
+N = floor(hours / interval) + 1; % number of pills taken
+sum_of_decays = exp(-k*t) * (exp(k*I*N) - 1) / (exp(k*I) - 1);
 concentration = sum_of_decays * init_conce;
 
 % There is no equivalent point calculation for the tabular method,
@@ -56,12 +58,6 @@ concentration = sum_of_decays * init_conce;
 
 % --- Tabular method ---
 % Graph generation
-sub_divisions = floor((num_points) / (hours/interval));
-% Evaluated region must be subdivided by such that we hit multiples
-% of `interval` with `delta_time` in order to add pills.
-% Divisions is approximately equal to `num_points`.
-divisions = (hours / interval) * sub_divisions;
-delta_time = hours / divisions;
 times2 = 0:delta_time:hours; % fill 1D array with numbers of hours passed
 conces2 = zeros([1, length(times2)]); % initialize empty array of dim(times)
 conces2(1) = init_conce; % setup initial value
