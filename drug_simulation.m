@@ -50,6 +50,10 @@ num_pills = floor(hours / interval) + 1;
 sum_of_decays = symsum(exp(-rate_constant * (hours - x * interval)) ...
     , x, 0, num_pills - 1);
 concentration = sum_of_decays * init_conce;
+
+% There is no equivalent point calculation for the tabular method,
+% since one must compute the intermediate values to reach a solution
+
 % --- Tabular method ---
 % Graph generation
 sub_divisions = floor((num_points) / (hours/interval));
