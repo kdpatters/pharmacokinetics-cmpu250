@@ -13,7 +13,7 @@ rate_constant = log(2) / halflife_drug; % Exponential decay: 1/2 = e^{-kt}
 
 % Parameters
 hours = 75;
-% interval MUST be an integer of function will break
+% interval MUST be an integer or function will break
 interval = 24; % number of hours between when each pill is taken
 num_points = 25; % how many points to graph, including t = 0
 
